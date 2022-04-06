@@ -36,7 +36,8 @@ shadeRenames ++= Seq(
   "spoiwo.**" -> "shadeio.spoiwo.@1",
   "com.github.pjfanning.**" -> "shadeio.pjfanning.@1",
   "org.apache.commons.io.**" -> "shadeio.commons.io.@1",
-  "org.apache.commons.compress.**" -> "shadeio.commons.compress.@1"
+  "org.apache.commons.compress.**" -> "shadeio.commons.compress.@1",
+  "org.apache.logging.log4j.**" -> "shadeio.logging.log4j.@1"
 )
 
 publishThinShadedJar
