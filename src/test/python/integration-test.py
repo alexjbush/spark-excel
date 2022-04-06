@@ -1,4 +1,4 @@
-from pyspark import SparkSession
+from pyspark.sql import SparkSession
 import sys
 
 if __name__ == '__main__':
