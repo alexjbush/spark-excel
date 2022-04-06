@@ -33,7 +33,7 @@ jobs:
           curl -s https://archive.apache.org/dist/spark/spark-${{ matrix.spark }}/spark-${{ matrix.spark }}-bin-hadoop${{ matrix.hadoop }}.tgz | tar xvz
       - name: Run Spark Test
         run: |
-          "${SPARK_HOME}/bin/spark-submit" --class org.apache.spark.examples.SparkPi "${SPARK_HOME}/examples/jars/spark-examples_${SCALA_VERSION%.*}-${{ matrix.spark }}.jar" 10
+          "${SPARK_HOME}/bin/spark-submit" --jars "target/scala-${SCALA_VERSION}/spark-excel_*.jar" src/test/python/integration-test.py "src/test/resources/spreadsheets/apache_poi/57231_MixedGasReport.xls"
         env:
           SPARK_HOME: ./spark-${{ matrix.spark }}-bin-hadoop${{ matrix.hadoop }}
           SCALA_VERSION: ${{ matrix.scala }}
