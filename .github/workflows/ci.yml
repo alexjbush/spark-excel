@@ -30,9 +30,9 @@ jobs:
         run: sbt ++${{ matrix.scala }} scalastyle "test:scalastyle"
       - name: Download Spark
         run: |
-          wget -qO- https://downloads.apache.org/spark/spark-${{ matrix.spark }}/spark-${{ matrix.spark }}-bin-hadoop${{ matrix.hadoop }}.tgz | tar xvz - -C spark
+          curl -s https://downloads.apache.org/spark/spark-${{ matrix.spark }}/spark-${{ matrix.spark }}-bin-hadoop${{ matrix.hadoop }}.tgz | tar xvz
       - name: Run Spark Test
         run: |
           "${SPARK_HOME}/bin/spark-submit" --class org.apache.spark.examples.SparkPi "${SPARK_HOME}/examples/jars/spark-examples_${{ matrix.scala }}-${{ matrix.spark }}.jar" 10
         env:
-          SPARK_HOME: ./spark/spark-${{ matrix.spark }}-bin-hadoop${{ matrix.hadoop }}
+          SPARK_HOME: ./spark-${{ matrix.spark }}-bin-hadoop${{ matrix.hadoop }}
