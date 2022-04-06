@@ -70,6 +70,11 @@ jobs:
       - name: Download Spark
         run: |
           curl -s https://archive.apache.org/dist/spark/spark-${{ matrix.spark }}/spark-${{ matrix.spark }}-bin-hadoop${{ matrix.hadoop }}.tgz | tar xvz
+      - name: Run Spark Test 1
+        run: |
+          "${SPARK_HOME}/bin/spark-submit" --packages "com.crealytics:spark-excel_2.12:${{ matrix.spark }}_0.16.5-pre2" src/test/python/integration-test.py "src/test/resources/spreadsheets/apache_poi/57231_MixedGasReport.xls"
+        env:
+          SPARK_HOME: ./spark-${{ matrix.spark }}-bin-hadoop${{ matrix.hadoop }}
       - name: Run Spark Test
         run: |
           "${SPARK_HOME}/bin/spark-submit" --jars "$( ls -m target/scala-${{ matrix.scala-major }}/*.jar )" src/test/python/integration-test.py "src/test/resources/spreadsheets/apache_poi/57231_MixedGasReport.xls"
